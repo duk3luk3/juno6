@@ -1,0 +1,9 @@
+{
+	"name": "juno6",
+	"description": "A minimal D application.",
+	"copyright": "Copyright © 2014, luke",
+	"authors": ["luke"],
+	"dependencies": {
+        "dirk": "~master"
+	}
+}
