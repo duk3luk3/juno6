@@ -61,7 +61,14 @@ class DiceBot {
 
     void read()
     {
-        loop.run();
+        if (loop)
+        {
+            loop.run();
+        }
+        else
+        {
+            client.read();
+        }
     }
 
     void onConnect()
@@ -75,7 +82,7 @@ class DiceBot {
 
         loop = new IrcEventLoop();
         loop.add(client);
-        //loop.postTimer(callBack, 0.5, IrcEventLoop.TimerRepeat.yes);
+        loop.postTimer(callBack, 0.5, IrcEventLoop.TimerRepeat.yes);
 
         foreach (string c ; channels)
         {
@@ -86,6 +93,7 @@ class DiceBot {
 
     void quit()
     {
+        loop.remove(client);
         client.quit("Bye!");
     }
 
@@ -142,7 +150,7 @@ class DiceBot {
 
                 writeln(sums);
 
-                int sux = filter!(a=>a>=tn)(sums).count();
+                auto sux = filter!(a=>a>=tn)(sums).count();
 
                 string res = "Result: ("
                     ~ sconcat(

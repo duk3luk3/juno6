@@ -47,6 +47,11 @@ void main(string[] args)
     bot.callBack = &callBack;
 
     bot.connect();
+
+    while(_run)
+    {
+        bot.read();
+    }
 }
 
 
